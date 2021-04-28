@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from './axios';
 import React, { useEffect, useState } from 'react'
 import requests from './Requests';
 import "./Row.css"
@@ -14,7 +14,7 @@ function Row ({title, fetchUrl, isLargeRow=false}) {
             setMovies(request.data.results)
             return request;
         }
-        fetchData()
+        fetchData();
     }, [fetchUrl])
     
     console.log(movies)
@@ -22,15 +22,37 @@ function Row ({title, fetchUrl, isLargeRow=false}) {
     return (
         <div className='row'>
             <h2 className='row_name'> {title}</h2>
+
+            <div className="row_posters">
             {movies.map((movie) => (
-                <img
-                 src={`${base_url}${
-                    isLargeRow ? movie.poster_path : movie.backdrop_path 
+               ( isLargeRow && movie.poster_path) ?
+                 (
+                    <img 
+                    className={`row_poster ${isLargeRow && "row_posterLarge"}`}
+                    key={movie.id}
+                    src={`${base_url}${
+                         movie.poster_path
+                    }`} 
+                    alt={movie.name}
+                    
+                    />
+               )
+               :
+               (
+                <img 
+                className={`row_poster ${isLargeRow && "row_posterLarge"}`}
+                key={movie.id}
+                src={`${base_url}${
+                    movie.backdrop_path 
                 }`} 
                 alt={movie.name}
                 
                 />
+               )
+
+               
             ))}
+        </div>
         </div>
     )
 }
