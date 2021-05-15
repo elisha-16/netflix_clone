@@ -41,3 +41,7 @@
 .signupScreen_gray {
     color: gray;
 }
+.signupScreen_link {
+    cursor: pointer;
+    text-decoration: underline;
+}

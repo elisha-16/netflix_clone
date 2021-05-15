@@ -1,7 +1,13 @@
 import React,{useState, useEffect} from 'react';
+import { useHistory } from 'react-router';
 import "./Nav.css";
+import {useDispatch, useSelector} from 'react-redux';
+import {login, logout, selectUser} from './features/counter/userSlice';
+
 function Nav()  {
     const [show, handleShow] = useState(false)
+    const history = useHistory()
+    const user = useSelector(selectUser);
 
     const transitionNavBar = () => {
         if (window.scrollY > 100){
@@ -13,6 +19,7 @@ function Nav()  {
     }
 
     useEffect(() => {
+        console.log('nav',user);
        window.addEventListener("scroll",transitionNavBar)
         return () => window.removeEventListener('scroll', transitionNavBar)
     }, [])
@@ -20,14 +27,16 @@ function Nav()  {
         <div className={`nav ${show && "nav_black"}`}>
             <div className="nav_contents">
             <img
+            onClick={() => history.push("/")}
              className="nav_logo"
             src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c529.png" 
             alt=""
             />
 
            <img
+            onClick={() => history.push("/profile")}
             className="nav_avatar"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4VuJZoiYcxDqu1AjBY8f5BpGTXeZ3rc5Ukg&usqp=CAU"
+            src="https://pbs.twimg.com/profile_images/1240119990411550720/hBEe3tdn_400x400.png"
            alt=""
            />
         
