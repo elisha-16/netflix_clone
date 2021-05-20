@@ -6,7 +6,7 @@ function LoginScreen() {
     const[signIn, setSignIn] = useState(false);
 
     return (
-        <div className='LoginScreen'>
+        <div className='loginScreen'>
             <img className='background_img' src='https://www.tabascohoy.com/wp-content/uploads/2020/07/Captura-de-Pantalla-2020-01-28-a-las-09.05.58.jpg'/>
             <div className='loginScreen_bg'>
                 <img className='loginScreen_logo'

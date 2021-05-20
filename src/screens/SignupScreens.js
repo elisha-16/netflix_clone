@@ -1,10 +1,15 @@
 import React, {useRef} from 'react'
 import { auth } from '../firebase';
 import './SignupScreen.css';
+import {useDispatch} from 'react-redux';
+import {login, logout, selectUser} from '../features/counter/userSlice';
+import { useHistory } from "react-router-dom";
 
 function SignupScreens() {
+const dispatch = useDispatch();
 const emailRef = useRef(null);
 const passwordRef = useRef(null);
+const history = useHistory();
 
     const register = (e) => {
       e.preventDefault();  
@@ -13,6 +18,12 @@ const passwordRef = useRef(null);
             passwordRef.current.value
         )
         .then((authUser) => {
+            dispatch(
+                login({
+                uid: authUser.uid,
+                email: authUser.email
+              }))
+              history.push('/home')
             console.log(authUser);
         })
         .catch((error) => {
@@ -28,7 +39,13 @@ const passwordRef = useRef(null);
         passwordRef.current.value
     )
     .then((authUser) => {
+        dispatch(
+            login({
+            uid: authUser.uid,
+            email: authUser.email
+          }))
         console.log(authUser);
+        history.push('/home')
     })
     .catch((error) => {
          alert(error.message)

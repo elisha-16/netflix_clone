@@ -2,12 +2,14 @@
     position: relative;
     height: 100%;
    background-size: cover;
+   overflow: hidden;
 }
 .background_img {
     position: absolute;
     height: 100%;
     opacity: 0.4;
     width: 100%;
+    /* overflow: hidden; */
 }
 .loginScreen_logo {
     position: fixed;

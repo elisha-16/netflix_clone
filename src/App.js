@@ -11,9 +11,9 @@ import ProfileScreen from "./screens/ProfileScreen"
 
 
 function App() {
-  const user = useSelector(selectUser);
+ // const user = useSelector(selectUser);
   const dispatch = useDispatch();
- // const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);
 
 useEffect(() => {
  auth.onAuthStateChanged((userAuth) => {
@@ -26,14 +26,15 @@ useEffect(() => {
         email: userAuth.email
       })
       );
-      //  setUser({
-      //    uid: userAuth.uid,
-      //    email: userAuth.email
-      //  })
+       setUser({
+         uid: userAuth.uid,
+         email: userAuth.email
+       })
       console.log('elisha',user)
     } else {
       //logged out
       dispatch(logout())
+      setUser(null)
     }
   });
   
@@ -47,6 +48,9 @@ console.log('>>',user)
           <LoginScreen/>
         ):(
           <Switch>
+             <Route path="/home">
+            <HomeScreen/>
+          </Route>
             <Route path='/profile'>
               <ProfileScreen/>
             </Route>
